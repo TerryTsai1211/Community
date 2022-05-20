@@ -2,20 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Parking
 {
     [TestFixture]
     public class Q3Test
     {
-        private ParkingFeeBiz biz { get; set; }
+        private ParkingAFeeStat feeStat { get; set; }
+        private Parking parking { get; set; }
 
         [SetUp]
-        public void SetUp()
+        public void Init()
         {
-            biz = new ParkingFeeBiz();
+            feeStat = new ParkingAFeeStat();
+            parking = new Parking(feeStat);
         }
 
         #region Q3 標準
@@ -34,7 +34,7 @@ namespace Parking
             DateTime start = DateTime.Parse(startValue);
             DateTime end = DateTime.Parse(endValue);
 
-            var actual = biz.CalcFeeForMultiDays(start, end);
+            var actual = parking.CalcFeeForMultiDays(start, end);
 
             Assert.AreEqual(expectedFee, actual.Sum(x => x.Fee));
             Assert.AreEqual(expectedDays, actual.Count());
@@ -48,7 +48,7 @@ namespace Parking
             DateTime start = Convert.ToDateTime(startValue);
             DateTime end = Convert.ToDateTime(endValue);
 
-            var ex = Assert.Throws<Exception>(() => biz.CalcFeeForMultiDays(start, end));
+            var ex = Assert.Throws<Exception>(() => parking.CalcFeeForMultiDays(start, end));
             StringAssert.Contains("早於", ex.Message);
         }
 
@@ -59,7 +59,7 @@ namespace Parking
             DateTime start = Convert.ToDateTime(startValue);
             DateTime end = Convert.ToDateTime(endValue);
 
-            var actual = biz.CalcFeeForMultiDays(start, end).ToList();
+            var actual = parking.CalcFeeForMultiDays(start, end).ToList();
 
             var expected = new List<SingleDayFee>()
             {
@@ -84,7 +84,7 @@ namespace Parking
             DateTime start = Convert.ToDateTime(startValue);
             DateTime end = Convert.ToDateTime(endValue);
 
-            var actual = biz.CalcFeeForMultiDays(start, end).ToList();
+            var actual = parking.CalcFeeForMultiDays(start, end).ToList();
 
             var expected = new List<SingleDayFee>()
             {
@@ -109,7 +109,7 @@ namespace Parking
             DateTime start = Convert.ToDateTime(startValue);
             DateTime end = Convert.ToDateTime(endValue);
 
-            var actual = biz.CalcFeeForMultiDays(start, end).ToList();
+            var actual = parking.CalcFeeForMultiDays(start, end).ToList();
 
             var expected = new List<SingleDayFee>()
             {
@@ -134,7 +134,7 @@ namespace Parking
             DateTime start = Convert.ToDateTime(startValue);
             DateTime end = Convert.ToDateTime(endValue);
 
-            var actual = biz.CalcFeeForMultiDays(start, end).ToList();
+            var actual = parking.CalcFeeForMultiDays(start, end).ToList();
 
             var expected = new List<SingleDayFee>()
             {
@@ -159,7 +159,7 @@ namespace Parking
             DateTime start = Convert.ToDateTime(startValue);
             DateTime end = Convert.ToDateTime(endValue);
 
-            var actual = biz.CalcFeeForMultiDays(start, end).ToList();
+            var actual = parking.CalcFeeForMultiDays(start, end).ToList();
 
             var expected = new List<SingleDayFee>()
             {
@@ -187,7 +187,7 @@ namespace Parking
             DateTime start = Convert.ToDateTime(startValue);
             DateTime end = Convert.ToDateTime(endValue);
 
-            var actual = biz.CalcFeeForMultiDays(start, end).ToList();
+            var actual = parking.CalcFeeForMultiDays(start, end).ToList();
 
             var expected = new List<SingleDayFee>()
             {
@@ -215,7 +215,7 @@ namespace Parking
             DateTime start = Convert.ToDateTime(startValue);
             DateTime end = Convert.ToDateTime(endValue);
 
-            var actual = biz.CalcFeeForMultiDays(start, end).ToList();
+            var actual = parking.CalcFeeForMultiDays(start, end).ToList();
 
             var expected = new List<SingleDayFee>()
             {
@@ -254,7 +254,7 @@ namespace Parking
             DateTime start = DateTime.Parse(startValue);
             DateTime end = DateTime.Parse(endValue);
 
-            var actual = biz.CalcParkingFee(start, end);
+            var actual = parking.CalcParkingFee(start, end);
 
             Assert.AreEqual(expectedFee, actual.TotalFee);
             Assert.AreEqual(expectedDays, actual.Items.Count());

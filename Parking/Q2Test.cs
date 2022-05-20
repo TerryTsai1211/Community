@@ -16,7 +16,7 @@ namespace Parking
             DateTime start = Convert.ToDateTime(startValue);
             DateTime end = Convert.ToDateTime(endValue);
 
-            var feeStat = new ParkingFeeBiz();
+            var feeStat = new ParkingAFeeStat();
             var actual = feeStat.CalcFee(start, end);
 
             Assert.AreEqual(expected, actual);
