@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace Parking
+namespace Parking.Test
 {
     [TestFixture]
     public class Q4Test

@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using System;
 
-namespace Parking
+namespace Parking.Test
 {
     [TestFixture]
     public class Q1Test
