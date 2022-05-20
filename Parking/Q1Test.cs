@@ -16,7 +16,8 @@ namespace Parking
             DateTime start = Convert.ToDateTime(startValue);
             DateTime end = Convert.ToDateTime(endValue);
 
-            int actual = ParkingFeeBiz.StatWorkFlow(start, end);
+            var biz = new ParkingFeeBiz();
+            int actual = biz.MinuteStat(start, end);
 
             Assert.AreEqual(expected, actual);
         }
