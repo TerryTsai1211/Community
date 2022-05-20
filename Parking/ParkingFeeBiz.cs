@@ -4,45 +4,28 @@ using System.Linq;
 
 namespace Parking
 {
-
-    public class SingleDayFee : IEquatable<SingleDayFee>
-    {
-        public DateTime StartTime { get; set; } // 精確到分鐘的入場時間
-        public DateTime EndTime { get; set; } // 精確到分鐘的離場時間
-        public int Fee { get; set; } // 本日應收取費用
-
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as SingleDayFee);
-        }
-
-        public bool Equals(SingleDayFee other)
-        {
-            return other != null &&
-                   StartTime == other.StartTime &&
-                   EndTime == other.EndTime &&
-                   Fee == other.Fee;
-        }
-
-        public override int GetHashCode()
-        {
-            int hashCode = 933646964;
-            hashCode = hashCode * -1521134295 + StartTime.GetHashCode();
-            hashCode = hashCode * -1521134295 + EndTime.GetHashCode();
-            hashCode = hashCode * -1521134295 + Fee.GetHashCode();
-            return hashCode;
-        }
-    }
-
     public class ParkingFeeBiz
     {
         private int _minutesInHalfHour { get; } = 30;
         private int _minutesInOneHour { get; } = 60;
         private decimal _zeroFee { get; } = 0m;
-        private decimal _oneDayFeeLimit { get; } = 50m;
+        private decimal _oneDayFeeMax { get; } = 50m;
 
-        // 傳入的是時間起迄, 並非分鐘數
-        public IEnumerable<SingleDayFee> CalcFeeForMultiDays_STD(DateTime start, DateTime end)
+        #region Q3_Advance
+        public ParkingFee CalcParkingFee(DateTime start, DateTime end)
+        {
+            if (start > end)
+            {
+                throw new Exception("起始日期早於結束日期");
+            }
+
+            var detail = CalcFeeForMultiDays(start, end);
+            return new ParkingFee(detail);
+        }
+        #endregion
+
+        #region Q3_STD
+        public IEnumerable<SingleDayFee> CalcFeeForMultiDays(DateTime start, DateTime end)
         {
             if (start > end)
             {
@@ -113,6 +96,7 @@ namespace Parking
         {
             return new DateTime(dt.Year, dt.Month, dt.Day);
         }
+        #endregion
 
         #region Q2 Code
         public decimal CalcFee(DateTime start, DateTime end)
@@ -120,8 +104,8 @@ namespace Parking
             int totalMinutes = MinuteStat(start, end);
 
             // Q3 新增，避免跨日計算停一整天還要往下跑計算
-            if (IsFullDay(totalMinutes))
-                return _oneDayFeeLimit;
+            if (IsOneDayFeeMax(totalMinutes))
+                return _oneDayFeeMax;
 
             if (IsFree(totalMinutes))
                 return _zeroFee;
@@ -131,11 +115,10 @@ namespace Parking
             return FeeStat(hoursFee, minutesFee);
         }
 
-        private bool IsFullDay(int totalMinutes)
+        private bool IsOneDayFeeMax(int totalMinutes)
         {
-            // Allen 老師 Q2 提示一整天為 1439 分鐘
-            int MinuutesInOneDay = 1439;
-            return (totalMinutes == MinuutesInOneDay);
+            int minutesOfOneDayFeeMax = 300;
+            return (totalMinutes >= minutesOfOneDayFeeMax);
         }
 
         private bool IsFree(int totalMinutes)
@@ -163,7 +146,7 @@ namespace Parking
         private decimal FeeStat(decimal hourFee, decimal minutesFee)
         {
             decimal feeStat = hourFee + minutesFee;
-            return Math.Min(_oneDayFeeLimit, feeStat);
+            return Math.Min(_oneDayFeeMax, feeStat);
         }
         #endregion
 
@@ -181,5 +164,47 @@ namespace Parking
             return new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, 0);
         }
         #endregion
+
+    }
+
+    public class ParkingFee
+    {
+        public IEnumerable<SingleDayFee> Items { get; private set; }
+        public int TotalFee { get; }
+
+        public ParkingFee(IEnumerable<SingleDayFee> items)
+        {
+            this.Items = items;
+            this.TotalFee = items.Sum(s => s.Fee);
+        }
+    }
+
+    public class SingleDayFee : IEquatable<SingleDayFee>
+    {
+        public DateTime StartTime { get; set; } // 精確到分鐘的入場時間
+        public DateTime EndTime { get; set; } // 精確到分鐘的離場時間
+        public int Fee { get; set; } // 本日應收取費用
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as SingleDayFee);
+        }
+
+        public bool Equals(SingleDayFee other)
+        {
+            return other != null &&
+                   StartTime == other.StartTime &&
+                   EndTime == other.EndTime &&
+                   Fee == other.Fee;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 933646964;
+            hashCode = hashCode * -1521134295 + StartTime.GetHashCode();
+            hashCode = hashCode * -1521134295 + EndTime.GetHashCode();
+            hashCode = hashCode * -1521134295 + Fee.GetHashCode();
+            return hashCode;
+        }
     }
 }

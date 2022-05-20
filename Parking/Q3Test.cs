@@ -29,12 +29,12 @@ namespace Parking
         [TestCase("2022/5/1 23:49:00", "2022/5/3 00:11:59", 57, 3)] // 跨2天,收費
         [TestCase("2022/5/1 22:59:00", "2022/5/3 00:11:59", 67, 3)] // 跨2天,收費
         [TestCase("2022/5/1 00:00:00", "2022/5/3 00:11:59", 107, 3)] // 跨2天,收費
-        public void AllenKuoTest(string startValue, string endValue, int expectedFee, int expectedDays)
+        public void AllenKuoTest_標準(string startValue, string endValue, int expectedFee, int expectedDays)
         {
             DateTime start = DateTime.Parse(startValue);
             DateTime end = DateTime.Parse(endValue);
 
-            var actual = biz.CalcFeeForMultiDays_STD(start, end);
+            var actual = biz.CalcFeeForMultiDays(start, end);
 
             Assert.AreEqual(expectedFee, actual.Sum(x => x.Fee));
             Assert.AreEqual(expectedDays, actual.Count());
@@ -48,7 +48,7 @@ namespace Parking
             DateTime start = Convert.ToDateTime(startValue);
             DateTime end = Convert.ToDateTime(endValue);
 
-            var ex = Assert.Throws<Exception>(() => biz.CalcFeeForMultiDays_STD(start, end));
+            var ex = Assert.Throws<Exception>(() => biz.CalcFeeForMultiDays(start, end));
             StringAssert.Contains("早於", ex.Message);
         }
 
@@ -59,7 +59,7 @@ namespace Parking
             DateTime start = Convert.ToDateTime(startValue);
             DateTime end = Convert.ToDateTime(endValue);
 
-            var actual = biz.CalcFeeForMultiDays_STD(start, end).ToList();
+            var actual = biz.CalcFeeForMultiDays(start, end).ToList();
 
             var expected = new List<SingleDayFee>()
             {
@@ -84,7 +84,7 @@ namespace Parking
             DateTime start = Convert.ToDateTime(startValue);
             DateTime end = Convert.ToDateTime(endValue);
 
-            var actual = biz.CalcFeeForMultiDays_STD(start, end).ToList();
+            var actual = biz.CalcFeeForMultiDays(start, end).ToList();
 
             var expected = new List<SingleDayFee>()
             {
@@ -109,7 +109,7 @@ namespace Parking
             DateTime start = Convert.ToDateTime(startValue);
             DateTime end = Convert.ToDateTime(endValue);
 
-            var actual = biz.CalcFeeForMultiDays_STD(start, end).ToList();
+            var actual = biz.CalcFeeForMultiDays(start, end).ToList();
 
             var expected = new List<SingleDayFee>()
             {
@@ -134,7 +134,7 @@ namespace Parking
             DateTime start = Convert.ToDateTime(startValue);
             DateTime end = Convert.ToDateTime(endValue);
 
-            var actual = biz.CalcFeeForMultiDays_STD(start, end).ToList();
+            var actual = biz.CalcFeeForMultiDays(start, end).ToList();
 
             var expected = new List<SingleDayFee>()
             {
@@ -159,7 +159,7 @@ namespace Parking
             DateTime start = Convert.ToDateTime(startValue);
             DateTime end = Convert.ToDateTime(endValue);
 
-            var actual = biz.CalcFeeForMultiDays_STD(start, end).ToList();
+            var actual = biz.CalcFeeForMultiDays(start, end).ToList();
 
             var expected = new List<SingleDayFee>()
             {
@@ -187,7 +187,7 @@ namespace Parking
             DateTime start = Convert.ToDateTime(startValue);
             DateTime end = Convert.ToDateTime(endValue);
 
-            var actual = biz.CalcFeeForMultiDays_STD(start, end).ToList();
+            var actual = biz.CalcFeeForMultiDays(start, end).ToList();
 
             var expected = new List<SingleDayFee>()
             {
@@ -215,7 +215,7 @@ namespace Parking
             DateTime start = Convert.ToDateTime(startValue);
             DateTime end = Convert.ToDateTime(endValue);
 
-            var actual = biz.CalcFeeForMultiDays_STD(start, end).ToList();
+            var actual = biz.CalcFeeForMultiDays(start, end).ToList();
 
             var expected = new List<SingleDayFee>()
             {
@@ -235,9 +235,29 @@ namespace Parking
             };
 
             CollectionAssert.AreEqual(expected, actual);
-        } 
+        }
         #endregion
 
+        [Test]
+        [TestCase("2022/5/1 09:00:00", "2022/5/1 09:10:59", 0, 1)] // 同一天
+        [TestCase("2022/5/1 09:00:00", "2022/5/1 09:11:59", 7, 1)] // 同一天
+        [TestCase("2022/5/1 09:00:00", "2022/5/1 10:00:59", 10, 1)] // 同一天
+        [TestCase("2022/5/1 23:49:00", "2022/5/2 00:10:59", 0, 2)] // 跨一天,免費
+        [TestCase("2022/5/1 23:48:00", "2022/5/2 00:00:00", 7, 2)] // 跨一天,收費
+        [TestCase("2022/5/1 23:48:00", "2022/5/2 00:11:59", 14, 2)] // 跨一天,收費
+        [TestCase("2022/5/1 00:00:00", "2022/5/2 00:11:59", 57, 2)] // 跨一天,收費
+        [TestCase("2022/5/1 23:49:00", "2022/5/3 00:11:59", 57, 3)] // 跨2天,收費
+        [TestCase("2022/5/1 22:59:00", "2022/5/3 00:11:59", 67, 3)] // 跨2天,收費
+        [TestCase("2022/5/1 00:00:00", "2022/5/3 00:11:59", 107, 3)] // 跨2天,收費
+        public void AllenKuoTest_進階(string startValue, string endValue, int expectedFee, int expectedDays)
+        {
+            DateTime start = DateTime.Parse(startValue);
+            DateTime end = DateTime.Parse(endValue);
 
+            var actual = biz.CalcParkingFee(start, end);
+
+            Assert.AreEqual(expectedFee, actual.TotalFee);
+            Assert.AreEqual(expectedDays, actual.Items.Count());
+        }
     }
 }
