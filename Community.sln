@@ -10,7 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LinqPad", "LinqPad", "{9655
 		LinqPad\20220509.01 日期相關處理.linq = LinqPad\20220509.01 日期相關處理.linq
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeaveHours", "LeaveHours\LeaveHours.csproj", "{F3EE16D4-CA6C-4F1B-A8CF-8AEB38056B77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaveHours", "LeaveHours\LeaveHours.csproj", "{F3EE16D4-CA6C-4F1B-A8CF-8AEB38056B77}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScoreSample", "Score\ScoreSample.csproj", "{130A2DF5-B0E6-41CD-83FA-90CA17526D61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,10 @@ Global
 		{F3EE16D4-CA6C-4F1B-A8CF-8AEB38056B77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3EE16D4-CA6C-4F1B-A8CF-8AEB38056B77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3EE16D4-CA6C-4F1B-A8CF-8AEB38056B77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{130A2DF5-B0E6-41CD-83FA-90CA17526D61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{130A2DF5-B0E6-41CD-83FA-90CA17526D61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{130A2DF5-B0E6-41CD-83FA-90CA17526D61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{130A2DF5-B0E6-41CD-83FA-90CA17526D61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
