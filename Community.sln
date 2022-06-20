@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaveHours", "LeaveHours\Le
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScoreSample", "Score\ScoreSample.csproj", "{130A2DF5-B0E6-41CD-83FA-90CA17526D61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoDimensionArray", "TwoDimensionArray\TwoDimensionArray.csproj", "{29D8C607-8274-4925-A5E2-89F6E9EC6B80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{130A2DF5-B0E6-41CD-83FA-90CA17526D61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{130A2DF5-B0E6-41CD-83FA-90CA17526D61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{130A2DF5-B0E6-41CD-83FA-90CA17526D61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29D8C607-8274-4925-A5E2-89F6E9EC6B80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29D8C607-8274-4925-A5E2-89F6E9EC6B80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29D8C607-8274-4925-A5E2-89F6E9EC6B80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29D8C607-8274-4925-A5E2-89F6E9EC6B80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
