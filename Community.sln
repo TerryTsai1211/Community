@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LinqPad", "LinqPad", "{96558108-F2F4-4C92-9EFE-62D42F9A5F4B}"
 	ProjectSection(SolutionItems) = preProject
 		LinqPad\20220509.01 日期相關處理.linq = LinqPad\20220509.01 日期相關處理.linq
+		LinqPad\20220620 03.03.50 二維陣列練習.linq = LinqPad\20220620 03.03.50 二維陣列練習.linq
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaveHours", "LeaveHours\LeaveHours.csproj", "{F3EE16D4-CA6C-4F1B-A8CF-8AEB38056B77}"
