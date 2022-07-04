@@ -17,10 +17,22 @@
                     {3,4,5},
                 };
 
+            Console.WriteLine("------ HasNext 搭配 Next ------");
+
             var iterator = new TwoDimensionArrayIterator<int>(data);
             while (iterator.HasNext())
             {
                 var item = iterator.Next();
+                Console.WriteLine(item.ToString()); // 應該顯示 0, 1, 2, 3, 4, 5
+            }
+
+            Console.WriteLine("------ 單獨呼叫 Next ------");
+
+            var iterator2 = new TwoDimensionArrayIterator<int>(data);
+            // 因為是單獨呼叫 Next 所以只要跑到 i 超過 6，就會超出陣列拋出 Exception
+            for (int i = 0; i <= 5; i++)
+            {
+                var item = iterator2.Next();
                 Console.WriteLine(item.ToString()); // 應該顯示 0, 1, 2, 3, 4, 5
             }
         }
@@ -219,8 +231,6 @@
 
         private const int length_Index_Diff = 1;
         private int _currentIndex = 0;
-        private int _rowIndex = 0;
-        private int _colIndex = 0;
 
         public TwoDimensionArrayIterator(T[,] data)
         {
@@ -235,22 +245,18 @@
 
         public bool HasNext()
         {
-            bool hasNext = true;
-
-            int index = _currentIndex++;
-            if (index > _data.Length - length_Index_Diff)
-                return !hasNext;
-
-            _rowIndex = index / _colLength;
-            _colIndex = index % _colLength;
-
-            return hasNext;
+            return (_currentIndex <= _data.Length - length_Index_Diff);
         }
 
         public T Next()
         {
-            return (T)_data[_rowIndex, _colIndex];
+            int index = _currentIndex++;
+            int rowIndex = index / _colLength;
+            int colIndex = index % _colLength;
+
+            return (T)_data[rowIndex, colIndex];
         }
     }
     #endregion
+
 }
