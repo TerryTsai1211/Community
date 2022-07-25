@@ -2,13 +2,6 @@ namespace Game_Dice
 {
     public class DiceGameTest
     {
-        DiceGame game ;
-
-        [SetUp]
-        public void SetUp()
-        {
-            game = new DiceGame();
-        }
 
         [Test]
         public void 手動測試觀察結果()
@@ -20,23 +13,6 @@ namespace Game_Dice
                 TestContext.WriteLine($"數字：{number}");
 
             TestContext.WriteLine($"總和：{result.Total}");
-        }
-
-        [Test]
-        public void Exception_骰子數字_只能是四個()
-        {
-            Exception ex = Assert.Throws<Exception>(() => game.PlayAndGetResult(new int[] { 1, 2, 3, 4, 5 }));
-            StringAssert.Contains("只能是四個", ex.Message);
-        }
-
-        [Test]
-        [TestCase(1,2,3,4)]
-        [TestCase(3,4,5,6)]
-        public void Exception_骰子數字_不符合遊戲規則(int no1, int no2, int no3, int no4)
-        {
-            var diceGame = ConvertToDiceNumbers(no1, no2, no3, no4);
-            Exception ex = Assert.Throws<Exception>(() => game.PlayAndGetResult(diceGame));
-            StringAssert.Contains("不符合遊戲規則", ex.Message);
         }
 
         [Test]
@@ -85,20 +61,12 @@ namespace Game_Dice
 
         private void AssertMethod(int no1, int no2, int no3, int no4, int expected)
         {
-            int[] diceGame = ConvertToDiceNumbers(no1, no2, no3, no4);
-            int actual = game.PlayAndGetResult(diceGame);
-            Assert.IsTrue(expected == actual);
-        }
+            IDiceNumbers diceNumbers = Substitute.For<IDiceNumbers>();
+            diceNumbers.GetDiceNumbers().Returns(new int[] { no1, no2, no3, no4 });
 
-        private int[] ConvertToDiceNumbers(int no1, int no2, int no3, int no4)
-        {
-            int[] diceGame = new int[4];
-            int index = 0;
-            diceGame[index++] = no1;
-            diceGame[index++] = no2;
-            diceGame[index++] = no3;
-            diceGame[index++] = no4;
-            return diceGame;
+            var diceGame = new DiceGame(diceNumbers);
+            var actual = diceGame.PlayAndGetResult();
+            Assert.IsTrue(expected == actual.Total);
         }
     }
 }
