@@ -1,8 +1,10 @@
+using NUnit.Framework;
+using NSubstitute;
+
 namespace Game_Dice
 {
     public class DiceGameTest
     {
-
         [Test]
         public void 手動測試觀察結果()
         {
@@ -68,5 +70,6 @@ namespace Game_Dice
             var actual = diceGame.PlayAndGetResult();
             Assert.IsTrue(expected == actual.Total);
         }
+
     }
 }
