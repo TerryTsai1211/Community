@@ -19,6 +19,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwoDimensionArray", "TwoDim
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Game_Dice", "Game_Dice\Game_Dice.csproj", "{3458F058-725F-4152-B719-334D1892DC01}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "20220820 判斷是否為閨年", "20220820 判斷是否為閨年", "{32786B04-4B33-4383-8A6E-0CA4C96B0188}"
+	ProjectSection(SolutionItems) = preProject
+		LinqPad\20220820 判斷是否為閨年\Func.linq = LinqPad\20220820 判斷是否為閨年\Func.linq
+		LinqPad\20220820 判斷是否為閨年\Local Function.png = LinqPad\20220820 判斷是否為閨年\Local Function.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +54,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{32786B04-4B33-4383-8A6E-0CA4C96B0188} = {96558108-F2F4-4C92-9EFE-62D42F9A5F4B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DBB1E667-FA60-4C11-8AC0-AA37C0646360}
