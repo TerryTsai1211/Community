@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LinqPad", "LinqPad", "{9655
 		LinqPad\20220620 03.03.50 二維陣列練習.linq = LinqPad\20220620 03.03.50 二維陣列練習.linq
 		LinqPad\20220729 發票中獎.linq = LinqPad\20220729 發票中獎.linq
 		LinqPad\20221022 判斷是否為指定有效日期.linq = LinqPad\20221022 判斷是否為指定有效日期.linq
+		LinqPad\20221122 SpyGame - 在陣列裡尋找指定的項目值.linq = LinqPad\20221122 SpyGame - 在陣列裡尋找指定的項目值.linq
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaveHours", "LeaveHours\LeaveHours.csproj", "{F3EE16D4-CA6C-4F1B-A8CF-8AEB38056B77}"
