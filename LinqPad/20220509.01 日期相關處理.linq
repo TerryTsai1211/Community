@@ -45,8 +45,8 @@ void Main()
 	DateTime.Today.DayOfWeek.Dump("Q3：今天星期幾");
 
 	// 4：假設一星期的第一天是星期日,請寫程式求得本星期的第一天
-	int deleteDays = ((int)DateTime.Today.DayOfWeek % 7) * -1;
-	DateTime.Today.AddDays(deleteDays).Dump("Q4：本星期第一天");
+	 int deleteDays = ((int)DateTime.Today.DayOfWeek % 7) * -1;
+	 DateTime.Today.AddDays(deleteDays).Dump("Q4：本星期第一天");
 
 	// 11：取得 2022 年裡,每一個星期日的記錄, 傳回型別是 DateTime[]
 	DateTime 今年第一天 = new DateTime(2022, 1, 1); // 偷懶直寫死
@@ -57,7 +57,7 @@ void Main()
 
 	int sundayCount = ((int)(明年第一週日.Subtract(今年第一週日).TotalDays) / 7);
 	
-	Enumerable.Range(0, sundayCount - 1)
+	Enumerable.Range(0, sundayCount)
 		.Select(offset => 今年第一週日.AddDays(offset * 7))
 		.Select(dt => (dt.ToString("yyyy/MM/dd") , dt.DayOfWeek))
 		.Dump("Q11：2022 年每一個星期日");
@@ -66,7 +66,17 @@ void Main()
 }
 
 private DateTime 年度第一個周日(DateTime 每年第一天)
-{	
-	int addDays = 7 - ((int)每年第一天.DayOfWeek % 7);
+{
+	int 一月 = 1;
+	int 一號 = 1;
+	
+	if (每年第一天.Month ==  一月 && 每年第一天.Day == 一號)
+		throw new Exception("不是該年第一天");
+	
+	if (每年第一天.DayOfWeek == DayOfWeek.Sunday)
+		return 每年第一天;
+
+	int 一周有七天 = 7;
+	int addDays = 一周有七天 - (int)每年第一天.DayOfWeek;
 	return 每年第一天.AddDays(addDays);
 }
