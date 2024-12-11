@@ -7,8 +7,8 @@ namespace Bill
         [OneTimeSetUp]
         public void Setup()
         {
-            _delegateFactory.Add(nameof(BillCalculatorHelper.Q2Biz), (T1, T2, T3) => BillCalculatorHelper.Q2Biz(T1, T2, T3));
-            _delegateFactory.Add(nameof(BillCalculatorHelper.Q3Biz), (T1, T2, T3) => BillCalculatorHelper.Q3Biz(T1, T2, T3));
+            _delegateFactory.Add(nameof(BillCalculatorHelper.最後一個人多出錢), (totalAmount, tipRate, numberOfPeople) => BillCalculatorHelper.最後一個人多出錢(totalAmount, tipRate, numberOfPeople));
+            _delegateFactory.Add(nameof(BillCalculatorHelper.前面N個人多出一元), (totalAmount, tipRate, numberOfPeople) => BillCalculatorHelper.前面N個人多出一元(totalAmount, tipRate, numberOfPeople));
         }
 
         [Test]
@@ -50,7 +50,7 @@ namespace Bill
         [Test]
         public void Q2_Delegate()
         {
-            var value = _delegateFactory[nameof(BillCalculatorHelper.Q2Biz)];
+            var value = _delegateFactory[nameof(BillCalculatorHelper.最後一個人多出錢)];
             var result = value.Invoke(1000, 10, 3);
             int pay366 = result.Count(x => x == 366);
             int pay368 = result.Count(x => x == 368);
@@ -62,7 +62,7 @@ namespace Bill
         [Test]
         public void Q3_Delegate()
         {
-            var value = _delegateFactory[nameof(BillCalculatorHelper.Q3Biz)];
+            var value = _delegateFactory[nameof(BillCalculatorHelper.前面N個人多出一元)];
             var result = value.Invoke(1000, 10, 3);
 
             int pay367 = result.Count(x => x == 367);

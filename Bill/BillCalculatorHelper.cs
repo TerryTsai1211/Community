@@ -11,7 +11,7 @@
             return (總費用含小費, 每個人平均費用, 剩餘費用);
         }
 
-        public static IEnumerable<int> Q2Biz(int totalAmount, decimal tipRate, int numberOfPeople)
+        public static IEnumerable<int> 最後一個人多出錢(int totalAmount, decimal tipRate, int numberOfPeople)
         {
             var cal = 費用計算(totalAmount, tipRate, numberOfPeople);
 
@@ -24,7 +24,7 @@
             return result;
         }
 
-        public static IEnumerable<int> Q3Biz(int totalAmount, decimal tipRate, int numberOfPeople)
+        public static IEnumerable<int> 前面N個人多出一元(int totalAmount, decimal tipRate, int numberOfPeople)
         {
             var cal = 費用計算(totalAmount, tipRate, numberOfPeople);
 

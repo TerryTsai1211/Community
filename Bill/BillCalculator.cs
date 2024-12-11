@@ -58,7 +58,7 @@
     {
         public IEnumerable<int> CalculateSplitAmount(int totalAmount, decimal tipRate, int numberOfPeople)
         {
-            return BillCalculatorHelper.Q2Biz(totalAmount, tipRate, numberOfPeople);
+            return BillCalculatorHelper.最後一個人多出錢(totalAmount, tipRate, numberOfPeople);
         }
     }
 
@@ -79,7 +79,7 @@
         // 回傳值: IEnumerable<int> 列出每一個人應分攤多少錢
         public IEnumerable<int> CalculateSplitAmount(int totalAmount, decimal tipRate, int numberOfPeople)
         {
-            return BillCalculatorHelper.Q3Biz(totalAmount, tipRate, numberOfPeople);
+            return BillCalculatorHelper.前面N個人多出一元(totalAmount, tipRate, numberOfPeople);
         }
     }
 
